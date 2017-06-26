@@ -41,7 +41,7 @@ namespace Financial.Controllers
         {
             ViewBag.CountryMasterID = new SelectList(db.CountryMasters, "ID", "Name");
             ViewBag.StateMasterID = new SelectList(db.StateMasters, "ID", "Name");
-            return View();
+            return View(); 
         }
 
         // POST: SignUp/Create

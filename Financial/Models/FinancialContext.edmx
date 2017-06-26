@@ -1,0 +1,684 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FinancialModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Channel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="10" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="20" />
+          <Property Name="IFSC" Type="varchar" MaxLength="50" />
+          <Property Name="BankName" Type="varchar" MaxLength="50" />
+          <Property Name="BankBranch" Type="varchar" MaxLength="50" />
+          <Property Name="IsMale" Type="bit" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CountryMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="500" />
+          <Property Name="Contact" Type="varchar" MaxLength="20" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CustomerFile">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IncomeTypeID" Type="int" Nullable="false" />
+          <Property Name="ChannelID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="SubProductIID" Type="int" />
+          <Property Name="LoanBankID" Type="int" />
+          <Property Name="Vehicle" Type="varchar" MaxLength="50" />
+          <Property Name="LoanAmont" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Tenure" Type="int" />
+          <Property Name="EMI" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="EMIDate" Type="datetime" />
+          <Property Name="PropertyTypeID" Type="int" />
+          <Property Name="PropertyAddress" Type="varchar" MaxLength="50" />
+          <Property Name="Pendency" Type="varchar" MaxLength="50" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FirmRegistration">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirmName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactPersonName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Contact" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryMasterID" Type="int" Nullable="false" />
+          <Property Name="StateMasterID" Type="int" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" />
+          <Property Name="PinCode" Type="varchar" MaxLength="10" />
+          <Property Name="SMSLimit" Type="int" />
+          <Property Name="OTP" Type="int" />
+          <Property Name="IsOtpUsed" Type="int" />
+        </EntityType>
+        <EntityType Name="LoanBank">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PropertyType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StateMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CountryMasterID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CustomerFile_Channel">
+          <End Role="Channel" Type="Self.Channel" Multiplicity="0..1" />
+          <End Role="CustomerFile" Type="Self.CustomerFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomerFile">
+              <PropertyRef Name="ChannelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerFile_LoanBank">
+          <End Role="LoanBank" Type="Self.LoanBank" Multiplicity="0..1" />
+          <End Role="CustomerFile" Type="Self.CustomerFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoanBank">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomerFile">
+              <PropertyRef Name="LoanBankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerFile_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="CustomerFile" Type="Self.CustomerFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomerFile">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerFile_PropertyType">
+          <End Role="PropertyType" Type="Self.PropertyType" Multiplicity="0..1" />
+          <End Role="CustomerFile" Type="Self.CustomerFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomerFile">
+              <PropertyRef Name="PropertyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerFile_SubProduct">
+          <End Role="SubProduct" Type="Self.SubProduct" Multiplicity="0..1" />
+          <End Role="CustomerFile" Type="Self.CustomerFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubProduct">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomerFile">
+              <PropertyRef Name="SubProductIID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FirmRegistration_CountryMaster">
+          <End Role="CountryMaster" Type="Self.CountryMaster" Multiplicity="1" />
+          <End Role="FirmRegistration" Type="Self.FirmRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CountryMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FirmRegistration">
+              <PropertyRef Name="CountryMasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FirmRegistration_StateMaster">
+          <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="1" />
+          <End Role="FirmRegistration" Type="Self.FirmRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StateMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FirmRegistration">
+              <PropertyRef Name="StateMasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateMaster_CountryMaster">
+          <End Role="CountryMaster" Type="Self.CountryMaster" Multiplicity="1" />
+          <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CountryMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StateMaster">
+              <PropertyRef Name="CountryMasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FinancialModelStoreContainer">
+          <EntitySet Name="Channel" EntityType="Self.Channel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CountryMaster" EntityType="Self.CountryMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerFile" EntityType="Self.CustomerFile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FirmRegistration" EntityType="Self.FirmRegistration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoanBank" EntityType="Self.LoanBank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropertyType" EntityType="Self.PropertyType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StateMaster" EntityType="Self.StateMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubProduct" EntityType="Self.SubProduct" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CustomerFile_Channel" Association="Self.FK_CustomerFile_Channel">
+            <End Role="Channel" EntitySet="Channel" />
+            <End Role="CustomerFile" EntitySet="CustomerFile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerFile_LoanBank" Association="Self.FK_CustomerFile_LoanBank">
+            <End Role="LoanBank" EntitySet="LoanBank" />
+            <End Role="CustomerFile" EntitySet="CustomerFile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerFile_Product" Association="Self.FK_CustomerFile_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="CustomerFile" EntitySet="CustomerFile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerFile_PropertyType" Association="Self.FK_CustomerFile_PropertyType">
+            <End Role="PropertyType" EntitySet="PropertyType" />
+            <End Role="CustomerFile" EntitySet="CustomerFile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerFile_SubProduct" Association="Self.FK_CustomerFile_SubProduct">
+            <End Role="SubProduct" EntitySet="SubProduct" />
+            <End Role="CustomerFile" EntitySet="CustomerFile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FirmRegistration_CountryMaster" Association="Self.FK_FirmRegistration_CountryMaster">
+            <End Role="CountryMaster" EntitySet="CountryMaster" />
+            <End Role="FirmRegistration" EntitySet="FirmRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FirmRegistration_StateMaster" Association="Self.FK_FirmRegistration_StateMaster">
+            <End Role="StateMaster" EntitySet="StateMaster" />
+            <End Role="FirmRegistration" EntitySet="FirmRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateMaster_CountryMaster" Association="Self.FK_StateMaster_CountryMaster">
+            <End Role="CountryMaster" EntitySet="CountryMaster" />
+            <End Role="StateMaster" EntitySet="StateMaster" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FinancialModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Channel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mobile" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IFSC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BankBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsMale" Type="Boolean" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CustomerFiles" Relationship="Self.FK_CustomerFile_Channel" FromRole="Channel" ToRole="CustomerFile" />
+        </EntityType>
+        <EntityType Name="CountryMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FirmRegistrations" Relationship="Self.FK_FirmRegistration_CountryMaster" FromRole="CountryMaster" ToRole="FirmRegistration" />
+          <NavigationProperty Name="StateMasters" Relationship="Self.FK_StateMaster_CountryMaster" FromRole="CountryMaster" ToRole="StateMaster" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CustomerFile">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IncomeTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ChannelID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="SubProductIID" Type="Int32" />
+          <Property Name="LoanBankID" Type="Int32" />
+          <Property Name="Vehicle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LoanAmont" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Tenure" Type="Int32" />
+          <Property Name="EMI" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="EMIDate" Type="DateTime" Precision="3" />
+          <Property Name="PropertyTypeID" Type="Int32" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pendency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Channel" Relationship="Self.FK_CustomerFile_Channel" FromRole="CustomerFile" ToRole="Channel" />
+          <NavigationProperty Name="LoanBank" Relationship="Self.FK_CustomerFile_LoanBank" FromRole="CustomerFile" ToRole="LoanBank" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_CustomerFile_Product" FromRole="CustomerFile" ToRole="Product" />
+          <NavigationProperty Name="PropertyType" Relationship="Self.FK_CustomerFile_PropertyType" FromRole="CustomerFile" ToRole="PropertyType" />
+          <NavigationProperty Name="SubProduct" Relationship="Self.FK_CustomerFile_SubProduct" FromRole="CustomerFile" ToRole="SubProduct" />
+        </EntityType>
+        <EntityType Name="FirmRegistration">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirmName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContactPersonName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contact" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CountryMasterID" Type="Int32" Nullable="false" />
+          <Property Name="StateMasterID" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="PinCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SMSLimit" Type="Int32" />
+          <Property Name="OTP" Type="Int32" />
+          <Property Name="IsOtpUsed" Type="Int32" />
+          <NavigationProperty Name="CountryMaster" Relationship="Self.FK_FirmRegistration_CountryMaster" FromRole="FirmRegistration" ToRole="CountryMaster" />
+          <NavigationProperty Name="StateMaster" Relationship="Self.FK_FirmRegistration_StateMaster" FromRole="FirmRegistration" ToRole="StateMaster" />
+        </EntityType>
+        <EntityType Name="LoanBank">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CustomerFiles" Relationship="Self.FK_CustomerFile_LoanBank" FromRole="LoanBank" ToRole="CustomerFile" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CustomerFiles" Relationship="Self.FK_CustomerFile_Product" FromRole="Product" ToRole="CustomerFile" />
+        </EntityType>
+        <EntityType Name="PropertyType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CustomerFiles" Relationship="Self.FK_CustomerFile_PropertyType" FromRole="PropertyType" ToRole="CustomerFile" />
+        </EntityType>
+        <EntityType Name="StateMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="CountryMasterID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CountryMaster" Relationship="Self.FK_StateMaster_CountryMaster" FromRole="StateMaster" ToRole="CountryMaster" />
+          <NavigationProperty Name="FirmRegistrations" Relationship="Self.FK_FirmRegistration_StateMaster" FromRole="StateMaster" ToRole="FirmRegistration" />
+        </EntityType>
+        <EntityType Name="SubProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CustomerFiles" Relationship="Self.FK_CustomerFile_SubProduct" FromRole="SubProduct" ToRole="CustomerFile" />
+        </EntityType>
+        <Association Name="FK_CustomerFile_Channel">
+          <End Role="Channel" Type="Self.Channel" Multiplicity="0..1" />
+          <End Role="CustomerFile" Type="Self.CustomerFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomerFile">
+              <PropertyRef Name="ChannelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FirmRegistration_CountryMaster">
+          <End Role="CountryMaster" Type="Self.CountryMaster" Multiplicity="1" />
+          <End Role="FirmRegistration" Type="Self.FirmRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CountryMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FirmRegistration">
+              <PropertyRef Name="CountryMasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateMaster_CountryMaster">
+          <End Role="CountryMaster" Type="Self.CountryMaster" Multiplicity="1" />
+          <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CountryMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StateMaster">
+              <PropertyRef Name="CountryMasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerFile_LoanBank">
+          <End Role="LoanBank" Type="Self.LoanBank" Multiplicity="0..1" />
+          <End Role="CustomerFile" Type="Self.CustomerFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoanBank">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomerFile">
+              <PropertyRef Name="LoanBankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerFile_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="CustomerFile" Type="Self.CustomerFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomerFile">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerFile_PropertyType">
+          <End Role="PropertyType" Type="Self.PropertyType" Multiplicity="0..1" />
+          <End Role="CustomerFile" Type="Self.CustomerFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomerFile">
+              <PropertyRef Name="PropertyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerFile_SubProduct">
+          <End Role="SubProduct" Type="Self.SubProduct" Multiplicity="0..1" />
+          <End Role="CustomerFile" Type="Self.CustomerFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubProduct">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomerFile">
+              <PropertyRef Name="SubProductIID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FirmRegistration_StateMaster">
+          <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="1" />
+          <End Role="FirmRegistration" Type="Self.FirmRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StateMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FirmRegistration">
+              <PropertyRef Name="StateMasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FinancialConnection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Channels" EntityType="Self.Channel" />
+          <EntitySet Name="CountryMasters" EntityType="Self.CountryMaster" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="CustomerFiles" EntityType="Self.CustomerFile" />
+          <EntitySet Name="FirmRegistrations" EntityType="Self.FirmRegistration" />
+          <EntitySet Name="LoanBanks" EntityType="Self.LoanBank" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="PropertyTypes" EntityType="Self.PropertyType" />
+          <EntitySet Name="StateMasters" EntityType="Self.StateMaster" />
+          <EntitySet Name="SubProducts" EntityType="Self.SubProduct" />
+          <AssociationSet Name="FK_CustomerFile_Channel" Association="Self.FK_CustomerFile_Channel">
+            <End Role="Channel" EntitySet="Channels" />
+            <End Role="CustomerFile" EntitySet="CustomerFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FirmRegistration_CountryMaster" Association="Self.FK_FirmRegistration_CountryMaster">
+            <End Role="CountryMaster" EntitySet="CountryMasters" />
+            <End Role="FirmRegistration" EntitySet="FirmRegistrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateMaster_CountryMaster" Association="Self.FK_StateMaster_CountryMaster">
+            <End Role="CountryMaster" EntitySet="CountryMasters" />
+            <End Role="StateMaster" EntitySet="StateMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerFile_LoanBank" Association="Self.FK_CustomerFile_LoanBank">
+            <End Role="LoanBank" EntitySet="LoanBanks" />
+            <End Role="CustomerFile" EntitySet="CustomerFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerFile_Product" Association="Self.FK_CustomerFile_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="CustomerFile" EntitySet="CustomerFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerFile_PropertyType" Association="Self.FK_CustomerFile_PropertyType">
+            <End Role="PropertyType" EntitySet="PropertyTypes" />
+            <End Role="CustomerFile" EntitySet="CustomerFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerFile_SubProduct" Association="Self.FK_CustomerFile_SubProduct">
+            <End Role="SubProduct" EntitySet="SubProducts" />
+            <End Role="CustomerFile" EntitySet="CustomerFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FirmRegistration_StateMaster" Association="Self.FK_FirmRegistration_StateMaster">
+            <End Role="StateMaster" EntitySet="StateMasters" />
+            <End Role="FirmRegistration" EntitySet="FirmRegistrations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FinancialModelStoreContainer" CdmEntityContainer="FinancialConnection">
+          <EntitySetMapping Name="Channels">
+            <EntityTypeMapping TypeName="FinancialModel.Channel">
+              <MappingFragment StoreEntitySet="Channel">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="IFSC" ColumnName="IFSC" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="BankBranch" ColumnName="BankBranch" />
+                <ScalarProperty Name="IsMale" ColumnName="IsMale" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CountryMasters">
+            <EntityTypeMapping TypeName="FinancialModel.CountryMaster">
+              <MappingFragment StoreEntitySet="CountryMaster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="FinancialModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerFiles">
+            <EntityTypeMapping TypeName="FinancialModel.CustomerFile">
+              <MappingFragment StoreEntitySet="CustomerFile">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IncomeTypeID" ColumnName="IncomeTypeID" />
+                <ScalarProperty Name="ChannelID" ColumnName="ChannelID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="SubProductIID" ColumnName="SubProductIID" />
+                <ScalarProperty Name="LoanBankID" ColumnName="LoanBankID" />
+                <ScalarProperty Name="Vehicle" ColumnName="Vehicle" />
+                <ScalarProperty Name="LoanAmont" ColumnName="LoanAmont" />
+                <ScalarProperty Name="Tenure" ColumnName="Tenure" />
+                <ScalarProperty Name="EMI" ColumnName="EMI" />
+                <ScalarProperty Name="EMIDate" ColumnName="EMIDate" />
+                <ScalarProperty Name="PropertyTypeID" ColumnName="PropertyTypeID" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="Pendency" ColumnName="Pendency" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FirmRegistrations">
+            <EntityTypeMapping TypeName="FinancialModel.FirmRegistration">
+              <MappingFragment StoreEntitySet="FirmRegistration">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirmName" ColumnName="FirmName" />
+                <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CountryMasterID" ColumnName="CountryMasterID" />
+                <ScalarProperty Name="StateMasterID" ColumnName="StateMasterID" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="SMSLimit" ColumnName="SMSLimit" />
+                <ScalarProperty Name="OTP" ColumnName="OTP" />
+                <ScalarProperty Name="IsOtpUsed" ColumnName="IsOtpUsed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoanBanks">
+            <EntityTypeMapping TypeName="FinancialModel.LoanBank">
+              <MappingFragment StoreEntitySet="LoanBank">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="FinancialModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyTypes">
+            <EntityTypeMapping TypeName="FinancialModel.PropertyType">
+              <MappingFragment StoreEntitySet="PropertyType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StateMasters">
+            <EntityTypeMapping TypeName="FinancialModel.StateMaster">
+              <MappingFragment StoreEntitySet="StateMaster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CountryMasterID" ColumnName="CountryMasterID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubProducts">
+            <EntityTypeMapping TypeName="FinancialModel.SubProduct">
+              <MappingFragment StoreEntitySet="SubProduct">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

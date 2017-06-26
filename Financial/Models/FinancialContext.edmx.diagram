@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="699fcb7d56ca442faeaa10bf413c4948" Name="Diagram1" ZoomLevel="59">
+        <EntityTypeShape EntityType="FinancialModel.Channel" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinancialModel.CountryMaster" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinancialModel.Customer" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinancialModel.CustomerFile" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinancialModel.FirmRegistration" Width="1.5" PointX="10.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinancialModel.LoanBank" Width="1.5" PointX="9.125" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinancialModel.Product" Width="1.5" PointX="14.875" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinancialModel.PropertyType" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinancialModel.StateMaster" Width="1.5" PointX="12.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinancialModel.SubProduct" Width="1.5" PointX="0.75" PointY="14" IsExpanded="true" />
+        <AssociationConnector Association="FinancialModel.FK_CustomerFile_Channel" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialModel.FK_FirmRegistration_CountryMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialModel.FK_StateMaster_CountryMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialModel.FK_CustomerFile_LoanBank" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialModel.FK_CustomerFile_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialModel.FK_CustomerFile_PropertyType" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialModel.FK_CustomerFile_SubProduct" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialModel.FK_FirmRegistration_StateMaster" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
